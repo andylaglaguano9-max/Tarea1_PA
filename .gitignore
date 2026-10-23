@@ -1,0 +1,42 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/nbactions.xml
+/nb-configuration.xml
+/nblibraries.properties
+
+### VS Code ###
+.vscode/
+
+### OS & Temporary files ###
+.DS_Store
+Thumbs.db
+*.log
+crop.ps1
+
+### Informes y Evidencias locales (Excluidos de la entrega de código) ###
+evidencias/
+SUBMISSION_TEMPLATE_TASK_1_2.md
+TASK_1_2_REPORT.md

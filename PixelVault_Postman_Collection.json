@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "pixelvault-api-collection-2026",
+		"name": "PixelVault Retro Store API",
+		"description": "Colección completa de pruebas para la API PixelVault (Spring Boot 3.x)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Catalogo Publico (Sin Header - 200 OK)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/juegos/catalogo-publico",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "v1", "juegos", "catalogo-publico"]
+				}
+			}
+		},
+		{
+			"name": "2. Detalle de Juego (Sin Header - Error 401 Interceptor)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/juegos/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "v1", "juegos", "1"]
+				}
+			}
+		},
+		{
+			"name": "3. Detalle de Juego (Con Header Valido - 200 OK)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Vault-Pass",
+						"value": "RETRO-MASTER-KEY-1989",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/juegos/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "v1", "juegos", "1"]
+				}
+			}
+		},
+		{
+			"name": "4. Registrar Juego (Validacion Fallida - 400 Bad Request)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Vault-Pass",
+						"value": "RETRO-MASTER-KEY-1989",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titulo\": \"Duck Hunt Fake\",\n  \"plataforma\": \"NES\",\n  \"anioLanzamiento\": 2030,\n  \"precio\": -50.0,\n  \"estadoConservacion\": \"LOOSE\",\n  \"rareza\": \"COMUN\",\n  \"serialRetro\": \"NES-99-USA\",\n  \"stock\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/juegos",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "v1", "juegos"]
+				}
+			}
+		},
+		{
+			"name": "5. Registrar Juego (Validacion Exitosa - 201 Created)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Vault-Pass",
+						"value": "RETRO-MASTER-KEY-1989",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titulo\": \"Super Metroid\",\n  \"plataforma\": \"SNES\",\n  \"anioLanzamiento\": 1994,\n  \"precio\": 299.99,\n  \"estadoConservacion\": \"MINT_IN_BOX\",\n  \"rareza\": \"EPICO\",\n  \"serialRetro\": \"SNES-1994-USA\",\n  \"stock\": 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/juegos",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "v1", "juegos"]
+				}
+			}
+		},
+		{
+			"name": "6. Consultar Saldo Coleccionista (200 OK)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Vault-Pass",
+						"value": "RETRO-MASTER-KEY-1989",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/coleccionistas/1/balance",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "v1", "coleccionistas", "1", "balance"]
+				}
+			}
+		},
+		{
+			"name": "7. Checkout de Compra - Compra Exitosa (201 Created)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Vault-Pass",
+						"value": "RETRO-MASTER-KEY-1989",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"coleccionistaId\": 1,\n  \"videojuegoId\": 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/ordenes/checkout",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "v1", "ordenes", "checkout"]
+				}
+			}
+		},
+		{
+			"name": "8. Checkout - Bloqueo Anti-Scalper AOP (409 Conflict)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Vault-Pass",
+						"value": "RETRO-MASTER-KEY-1989",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"coleccionistaId\": 1,\n  \"videojuegoId\": 6\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/ordenes/checkout",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "v1", "ordenes", "checkout"]
+				}
+			}
+		}
+	]
+}

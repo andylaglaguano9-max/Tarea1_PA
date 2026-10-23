@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelVault - The Retro Gaming Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Scanline overlay -->
+    <div class="scanline-overlay"></div>
+
+    <!-- Header -->
+    <header class="vault-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <span class="logo-icon">🎮</span>
+                <div>
+                    <h1 class="logo-title">PIXELVAULT</h1>
+                    <p class="logo-subtitle">THE RETRO GAMING ENGINE</p>
+                </div>
+            </div>
+            <div class="header-status">
+                <div class="status-indicator" id="connectionStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">CONNECTING...</span>
+                </div>
+                <div class="vault-key-section">
+                    <label for="vaultKey">🔑 VAULT PASS</label>
+                    <input type="password" id="vaultKey" value="RETRO-MASTER-KEY-1989" placeholder="Enter X-Vault-Pass">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+        <button class="tab-btn active" data-tab="catalog" onclick="switchTab('catalog')">
+            <span>🕹️</span> CATALOG
+        </button>
+        <button class="tab-btn" data-tab="collectors" onclick="switchTab('collectors')">
+            <span>👾</span> COLLECTORS
+        </button>
+        <button class="tab-btn" data-tab="checkout" onclick="switchTab('checkout')">
+            <span>💰</span> CHECKOUT
+        </button>
+        <button class="tab-btn" data-tab="history" onclick="switchTab('history')">
+            <span>📜</span> HISTORY
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- CATALOG TAB -->
+        <section id="tab-catalog" class="tab-panel active">
+            <div class="section-header">
+                <h2>🕹️ Retro Game Vault Catalog</h2>
+                <p class="section-desc">Browse the curated collection of legendary cartridges and relics</p>
+            </div>
+            <div class="card-grid" id="catalogGrid">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading vault inventory...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COLLECTORS TAB -->
+        <section id="tab-collectors" class="tab-panel">
+            <div class="section-header">
+                <h2>👾 Registered Collectors</h2>
+                <p class="section-desc">View collector profiles and vault balances</p>
+            </div>
+            <div class="collectors-list" id="collectorsList">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading collector profiles...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECKOUT TAB -->
+        <section id="tab-checkout" class="tab-panel">
+            <div class="section-header">
+                <h2>💰 Relic Acquisition Checkout</h2>
+                <p class="section-desc">Execute a transactional purchase with IoC, AOP Anti-Scalper, and Bean Validation</p>
+            </div>
+            <div class="checkout-container">
+                <div class="checkout-form-card">
+                    <h3>📦 Purchase Order</h3>
+                    <div class="form-group">
+                        <label for="coleccionistaId">Collector ID</label>
+                        <select id="coleccionistaId" class="form-input">
+                            <option value="">-- Select collector --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="videojuegoId">Game ID</label>
+                        <select id="videojuegoId" class="form-input">
+                            <option value="">-- Select game --</option>
+                        </select>
+                    </div>
+                    <div class="checkout-info">
+                        <div class="info-badge">
+                            <span>🔒</span> Requires X-Vault-Pass header
+                        </div>
+                        <div class="info-badge warning">
+                            <span>⚡</span> Anti-Scalper AOP active (max 2 Holy Grails / 24h)
+                        </div>
+                    </div>
+                    <button class="btn-checkout" id="btnCheckout" onclick="executeCheckout()">
+                        🎮 EXECUTE CHECKOUT
+                    </button>
+                </div>
+                <div class="checkout-result-card" id="checkoutResult">
+                    <h3>📡 API Response</h3>
+                    <div class="result-placeholder">
+                        <span>⬅️</span>
+                        <p>Select a collector and game, then click Execute Checkout to see the live API response.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HISTORY TAB -->
+        <section id="tab-history" class="tab-panel">
+            <div class="section-header">
+                <h2>📜 Purchase History</h2>
+                <p class="section-desc">View transaction records for a collector</p>
+            </div>
+            <div class="history-search">
+                <select id="historyCollectorId" class="form-input">
+                    <option value="">-- Select collector --</option>
+                </select>
+                <button class="btn-search" onclick="loadHistory()">🔍 SEARCH</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="result-placeholder">
+                    <span>📜</span>
+                    <p>Select a collector to view their purchase history.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="vault-footer">
+        <p>🎮 PixelVault REST API v1.0.0 · Spring Boot 3.3.4 · Java 17 · Task 1.2 · Andy Laglaguano</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
